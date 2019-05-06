@@ -1,0 +1,1079 @@
+@startuml
+
+title __CSHARP's Class Diagram__\n
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        class CBaseListener {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CCPPLanguageProperties {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        class CLexer {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        interface CListener {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.cpp {
+          class CPP14BaseListener {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.cpp {
+          class CPP14Lexer {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.cpp {
+          interface CPP14Listener {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.cpp {
+          class CPP14Parser {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        class CParser {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CSharpCounter {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CSharpLanguageProperties {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.csharp {
+          class CSharpLexer {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    class CSharpLexer {
+    }
+  }
+  
+
+  package  {
+    class CSharpParser {
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.csharp {
+          class CSharpParser {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.csharp {
+          class CSharpParserBaseListener {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    class CSharpParserBaseListener {
+    }
+  }
+  
+
+  package  {
+    interface CSharpParserListener {
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.csharp {
+          interface CSharpParserListener {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.csharp {
+          class CSharpPreprocessorParser {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    class CSharpPreprocessorParser {
+    }
+  }
+  
+
+  package  {
+    class CSharpPreprocessorParserBaseListener {
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.csharp {
+          class CSharpPreprocessorParserBaseListener {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.c {
+        package com.samsung.tcm.core.parser.csharp {
+          interface CSharpPreprocessorParserListener {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    interface CSharpPreprocessorParserListener {
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.csharp {
+        class CSharpTestCaseAnalysisHelper {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.csharp {
+        class CSharpTestCaseAnalyzer {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.csharp {
+        class CSharpTestFilePreprocessor {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CmplxDataType {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CodeCounter {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CommentHandler {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CompilerDirectiveHandler {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class Constants {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.cpp {
+        class CppTestcaseAnalyzer {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class DataTypes {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ELanguage {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestCaseFormatType {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestCaseIdentifierLocation {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestCaseIdentifyMethod {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestCaseType {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.common {
+        enum ETestCaseUnitAnalysisResult {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestFileIdentifierLocation {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestFileIdentifierMethod {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestFramework {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestType {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class FileUtils {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.exceptions {
+        class FilterPatternMismatchException {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface IIdentifier {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface IIdentifierLocation {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface IIdentifyMethod {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ILanguage {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ITestCaseFormatType {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ITestCaseType {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.common {
+        interface ITestCaseUnitAnalysisResult {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ITestFramework {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ITestType {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.exceptions {
+        class InvalidFormatExpressionException {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.exceptions {
+        class InvalidHelperStatusException {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.java {
+        class Java8BaseListener {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.java {
+        class Java8Lexer {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.java {
+        interface Java8Listener {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.java {
+        class Java8Parser {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.js {
+        abstract class JavaScriptBaseLexer {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.js {
+        abstract class JavaScriptBaseParser {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.js {
+        class JavaScriptLexer {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.js {
+        class JavaScriptParser {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.js {
+        class JavaScriptParserBaseListener {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.parser.js {
+        interface JavaScriptParserListener {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        abstract class LanguageProperties {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      class Main {
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.common {
+        class MethodAnalysisResult {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.reviewer.gerrit {
+        class MinerForCSharpApi_NeedModularize {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class MultiLanguageHandler {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.exceptions {
+        class NoMatchingIdentifiersException {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.exceptions {
+        class NotSupportException {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.exceptions {
+        class NotSupportFilterPatternException {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.exceptions {
+        class NotSupportIdentifierAnalysisException {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class QuoteHandler {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.exceptions {
+        class ResourceNotFoundException {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class RuntimeParameters {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        package com.samsung.tcm.schema.assertion {
+          abstract class SCAssertion {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCITestCaseIdentifier {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCITestFileIdentifier {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        package com.samsung.tcm.schema.assertion {
+          package com.samsung.tcm.schema.assertion.nunit {
+            class SCNUnitAssertion {
+            }
+          }
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCProject {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCRepository {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCSubProject {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCTestCase {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCTestFile {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCTestTarget {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.util {
+        class StringSearcher {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class StringUtils {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.common {
+        abstract class TestCaseAnalysisHelper {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.common {
+        class TestCaseCalleeInMethod {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.util {
+        class TestCaseFileFilter {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.util {
+        class TestCaseFileRegExprFilter {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.analysis.common {
+        class TestCaseUnitAnalysis {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.context {
+        class TlmContext {
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class UCCFile {
+        }
+      }
+    }
+  }
+  
+
+  CBaseListener -up-|> CListener
+  CCPPLanguageProperties -up-|> LanguageProperties
+  CLexer -up-|> Lexer
+  CPP14BaseListener -up-|> CPP14Listener
+  CPP14Lexer -up-|> Lexer
+  CPP14Parser -up-|> Parser
+  CParser -up-|> Parser
+  CSharpCounter -up-|> CodeCounter
+  CSharpLanguageProperties -up-|> LanguageProperties
+  CSharpLexer -up-|> Lexer
+  CSharpLexer -up-|> Lexer
+  CSharpParser -up-|> Parser
+  CSharpParser -up-|> Parser
+  CSharpParserBaseListener -up-|> CSharpParserListener
+  CSharpParserBaseListener -up-|> CSharpParserListener
+  CSharpPreprocessorParser -up-|> Parser
+  CSharpPreprocessorParser -up-|> Parser
+  CSharpPreprocessorParserBaseListener -up-|> CSharpPreprocessorParserListener
+  CSharpPreprocessorParserBaseListener -up-|> CSharpPreprocessorParserListener
+  CSharpTestCaseAnalysisHelper -up-|> TestCaseAnalysisHelper
+  CSharpTestCaseAnalyzer -up-|> CSharpParserBaseListener
+  CSharpTestCaseAnalyzer o-- CSharpCounter : locCounter
+  CSharpTestCaseAnalyzer o-- StringSearcher : searcher
+  CSharpTestCaseAnalyzer o-- CSharpTestCaseAnalysisHelper : helper
+  CSharpTestCaseAnalyzer o-- SCAssertion : assertions
+  CSharpTestCaseAnalyzer o-- MethodAnalysisResult : methodAnalysisResult
+  CSharpTestCaseAnalyzer o-- TestCaseCalleeInMethod : callee
+  CodeCounter o-- LanguageProperties : LangProps
+  CodeCounter o-- CommentHandler : CommentHandler
+  CodeCounter o-- CompilerDirectiveHandler : CompilerDirectiveHandler
+  CodeCounter o-- QuoteHandler : QuoteHandler
+  CodeCounter o-- MultiLanguageHandler : MultiLanguageHandler
+  CommentHandler o-- CommentState : commentState
+  CppTestcaseAnalyzer -up-|> CPP14BaseListener
+  ELanguage -up-|> ILanguage
+  ETestCaseFormatType -up-|> ITestCaseFormatType
+  ETestCaseIdentifierLocation -up-|> IIdentifierLocation
+  ETestCaseIdentifyMethod -up-|> IIdentifyMethod
+  ETestCaseType -up-|> ITestCaseType
+  ETestCaseUnitAnalysisResult -up-|> ITestCaseUnitAnalysisResult
+  ETestFileIdentifierLocation -up-|> IIdentifierLocation
+  ETestFileIdentifierMethod -up-|> IIdentifyMethod
+  ETestFramework -up-|> ITestFramework
+  ETestType -up-|> ITestType
+  Java8BaseListener -up-|> Java8Listener
+  Java8Lexer -up-|> Lexer
+  Java8Parser -up-|> Parser
+  JavaScriptBaseLexer -up-|> Lexer
+  JavaScriptBaseParser -up-|> Parser
+  JavaScriptLexer -up-|> JavaScriptBaseLexer
+  JavaScriptParser -up-|> JavaScriptBaseParser
+  JavaScriptParserBaseListener -up-|> JavaScriptParserListener
+  MultiLanguageHandler o-- LanguageState : languageState
+  NotSupportFilterPatternException -up-|> NotSupportException
+  NotSupportIdentifierAnalysisException -up-|> NotSupportException
+  RuntimeParameters o-- OutputFormat : OutputFileFmt
+  SCITestCaseIdentifier -up-|> IIdentifier
+  SCITestCaseIdentifier -up-|> IIdentifyMethod
+  SCITestCaseIdentifier -up-|> IIdentifierLocation
+  SCITestCaseIdentifier o-- ETestCaseIdentifyMethod : idMethodE
+  SCITestCaseIdentifier o-- ETestCaseIdentifierLocation : idLocationE
+  SCITestFileIdentifier -up-|> IIdentifier
+  SCITestFileIdentifier -up-|> IIdentifierLocation
+  SCITestFileIdentifier -up-|> IIdentifyMethod
+  SCITestFileIdentifier o-- ETestFileIdentifierLocation : testFileIdentifierLocation
+  SCITestFileIdentifier o-- ETestFileIdentifierMethod : testFileIdentifierMethod
+  SCNUnitAssertion -up-|> SCAssertion
+  SCTestCase o-- ETestCaseFormatType : formatType
+  SCTestCase o-- ETestType : testType
+  SCTestCase o-- SCTestTarget : testTarget
+  SCTestCase o-- ETestFramework : testFramework
+  SCTestCase o-- ELanguage : language
+  SCTestFile o-- SCTestCase : testcase
+  TestCaseAnalysisHelper o-- SCTestCase : testCase
+  TestCaseUnitAnalysis o-- ETestCaseIdentifyMethod : idMethod
+  UCCFile o-- SourceFileType : FileType
+  UCCFile o-- LanguagePropertiesType : LangProperty
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

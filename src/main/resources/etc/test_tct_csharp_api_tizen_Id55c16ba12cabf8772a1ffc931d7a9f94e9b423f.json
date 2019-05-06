@@ -1,0 +1,23 @@
+//https://review.tizen.org/gerrit/changes/Id55c16ba12cabf8772a1ffc931d7a9f94e9b423f
+)]}'
+{
+  "id": "test%2Ftct%2Fcsharp%2Fapi~tizen~Id55c16ba12cabf8772a1ffc931d7a9f94e9b423f",
+  "project": "test/tct/csharp/api",
+  "branch": "tizen",
+  "hashtags": [],
+  "change_id": "Id55c16ba12cabf8772a1ffc931d7a9f94e9b423f",
+  "subject": "[Network][Non-ACR][Remove unnecessary power-off of wifi]",
+  "status": "NEW",
+  "created": "2019-01-22 04:46:00.000000000",
+  "updated": "2019-01-22 04:46:00.000000000",
+  "submit_type": "MERGE_IF_NECESSARY",
+  "mergeable": true,
+  "insertions": 13,
+  "deletions": 20,
+  "unresolved_comment_count": 0,
+  "has_review_started": true,
+  "_number": 198172,
+  "owner": {
+    "_account_id": 9455
+  }
+}

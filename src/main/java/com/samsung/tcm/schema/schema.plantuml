@@ -1,0 +1,438 @@
+@startuml
+
+title __SCHEMA's Class Diagram__\n
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ELanguage {
+          C
+          CPLUS
+          CSHARP
+          JAVA
+          JAVASCRIPT
+          language
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestCaseFormatType {
+          CODE
+          TOOL
+          DOCUMENT
+          NONE
+          testCaseFormatType
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestCaseIdentifierLocation {
+          METHOD_NAME
+          ATTRIBUTE
+          ANNOTATION
+          NONE
+          identifierLocationType
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestCaseIdentifyMethod {
+          PREFIX
+          POSTFIX
+          REGEXPR
+          EXACT
+          NONE
+          identifierMethodType
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestCaseType {
+          POSITIVE
+          NEGATIVE
+          NONE
+          testCaseType
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestFileIdentifierLocation {
+          FILE_NAME
+          FILE_EXTENSIONS
+          NONE
+          identifierLocationType
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestFileIdentifierMethod {
+          PREFIX
+          POSTFIX
+          REGEXPR
+          EXACT
+          NONE
+          identifierMethodType
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestFramework {
+          GTEST
+          JUNIT
+          CUSTOM
+          testFramework
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        enum ETestType {
+          UNIT_TEST
+          INTEGRATION_TEST
+          SYSTEM_TEST
+          testType
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface IIdentifier {
+            {abstract} + getIdentifier()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface IIdentifierLocation {
+            {abstract} + getIdentifierLocationType()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface IIdentifyMethod {
+            {abstract} + getIdentifierMethodType()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ILanguage {
+            {abstract} + getLanguage()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ITestCaseFormatType {
+            {abstract} + getTestCaseFormatType()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ITestCaseType {
+            {abstract} + getTypeCaseType()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ITestFramework {
+            {abstract} + getTestFramework()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        interface ITestType {
+            {abstract} + getTestType()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCITestCaseIdentifier {
+            - ID : String
+            - identifier : String
+            - idMethod : String
+            - idLocation : String
+            + SCITestCaseIdentifier()
+            + getIdentifier()
+            + getIdentifierLocationType()
+            + getIdentifierMethodType()
+            + getID()
+            + getIdentifierMethodEnum()
+            + getIdentifierLocationEnum()
+            + setIdentifier()
+            + setIdMethod()
+            + setIdLocation()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCITestFileIdentifier {
+            - identifier : String
+            - idMethod : String
+            - idLocation : String
+            + SCITestFileIdentifier()
+            + getIdentifier()
+            + getIdentifierLocationType()
+            + getIdentifierMethodType()
+            + getIdentifierLocationE()
+            + getIdentifierMethodTE()
+            + setIdentifier()
+            + setIdMethod()
+            + setIdLocation()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCProject {
+            - projectName : String
+            - subProjects : ArrayList<SCSubProject>
+            + SCProject()
+            + addSubProject()
+            + getProjectName()
+            + setProjectName()
+            + getSubProjects()
+            + setSubProjects()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCRepository {
+            - remoteUrl : String
+            - branchName : String
+            - testcaseFiles : ArrayList<SCTestFile>
+            + SCRepository()
+            + getRemoteUrl()
+            + setRemoteUrl()
+            + getBranchName()
+            + setBranchName()
+            + getTestcaseFiles()
+            + addTestcaseFile()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCSubProject {
+            - name : String
+            - repositories : ArrayList<SCRepository>
+            + SCSubProject()
+            + getName()
+            + setName()
+            + addRepository()
+            + getRepositories()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCTestCase {
+            - tcIdentifiers : ArrayList<SCITestCaseIdentifier>
+            - boolExpressionStr : String
+            - boolExpression : Expression<String>
+            - identifiersForNegTC : ArrayList<SCITestCaseIdentifier>
+            - boolExpressionForNegTCStr : String
+            - boolExpressionForNegTC : Expression<String>
+            - identifiersForPosTC : ArrayList<SCITestCaseIdentifier>
+            - boolExpressionForPosTCStr : String
+            - boolExpressionForPosTC : Expression<String>
+            + SCTestCase()
+            + SCTestCase()
+            + addTCIdentifier()
+            + addPositiveTCIdentifier()
+            + addNegativeTCIdentifier()
+            + getTestFramework()
+            + setTestFramework()
+            + getLanguage()
+            + setLanguage()
+            + setFormatType()
+            + setTestType()
+            + setTestTarget()
+            + setBoolExpressionStr()
+            + setBoolExpressionForNegTCStr()
+            + setBoolExpressionForPosTCStr()
+            + getBoolExpressionStr()
+            + getBoolExpressionForNegTCStr()
+            + getBoolExpressionForPosTCStr()
+            + getTcIdentifiers()
+            + getIdentifiersForNegTC()
+            + getIdentifiersForPosTC()
+            + getFormatType()
+            + getTestType()
+            + getTestTarget()
+            + getBoolExpression()
+            + getBoolExpressionForNegTC()
+            + getBoolExpressionForPosTC()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCTestFile {
+            - identifiers : ArrayList<SCITestFileIdentifier>
+            + SCTestFile()
+            + getTestcase()
+            + setTestcase()
+            + getIdentifiers()
+            + addIdentifier()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.schema {
+        class SCTestTarget {
+            - name : String
+            + SCTestTarget()
+            + getName()
+            + setName()
+        }
+      }
+    }
+  }
+  
+
+  ELanguage -up-|> ILanguage
+  ETestCaseFormatType -up-|> ITestCaseFormatType
+  ETestCaseIdentifierLocation -up-|> IIdentifierLocation
+  ETestCaseIdentifyMethod -up-|> IIdentifyMethod
+  ETestCaseType -up-|> ITestCaseType
+  ETestFileIdentifierLocation -up-|> IIdentifierLocation
+  ETestFileIdentifierMethod -up-|> IIdentifyMethod
+  ETestFramework -up-|> ITestFramework
+  ETestType -up-|> ITestType
+  SCITestCaseIdentifier -up-|> IIdentifier
+  SCITestCaseIdentifier -up-|> IIdentifyMethod
+  SCITestCaseIdentifier -up-|> IIdentifierLocation
+  SCITestCaseIdentifier o-- ETestCaseIdentifyMethod : idMethodE
+  SCITestCaseIdentifier o-- ETestCaseIdentifierLocation : idLocationE
+  SCITestFileIdentifier -up-|> IIdentifier
+  SCITestFileIdentifier -up-|> IIdentifierLocation
+  SCITestFileIdentifier -up-|> IIdentifyMethod
+  SCITestFileIdentifier o-- ETestFileIdentifierLocation : testFileIdentifierLocation
+  SCITestFileIdentifier o-- ETestFileIdentifierMethod : testFileIdentifierMethod
+  SCTestCase o-- ETestCaseFormatType : formatType
+  SCTestCase o-- ETestType : testType
+  SCTestCase o-- SCTestTarget : testTarget
+  SCTestCase o-- ETestFramework : testFramework
+  SCTestCase o-- ELanguage : language
+  SCTestFile o-- SCTestCase : testcase
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -1,0 +1,8 @@
+// Tizen Native TCT 내의 assert 로 시작하는 header 파일 내에서 정의하는 매크로 집합이다
+// 단, assert 는 assert.h 를 유추하였다
+assert
+assert_eq_with_exit
+assert_eq_without_exit
+assert_neq_with_exit
+assert_neq_without_exit
+assert_with_exit

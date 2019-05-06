@@ -1,0 +1,10 @@
+Contains
+DoesNotContain
+StartsWith
+DoesNotStartsWith
+EndsWith
+DoesNotEndWith
+AreEqualIgnoringCase
+AreNotEqualIgnoringCase
+IsMatch
+DoesNotMatch

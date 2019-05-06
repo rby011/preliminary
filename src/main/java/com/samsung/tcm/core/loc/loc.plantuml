@@ -1,0 +1,785 @@
+@startuml
+
+title __LOC's Class Diagram__\n
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CCPPLanguageProperties {
+            + CCPPLanguageProperties()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CSharpCounter {
+            {static} - logger : Logger
+            - lslocKeywordsCount : int
+            - level : int
+            + CSharpCounter()
+            # CountFilePSLOC()
+            # CountFileLSLOC()
+            # getLoopLevel()
+            # getFunctionName()
+            # getCyclomaticComplexity()
+            # CountLSLOCKeywords()
+            # DeleteLinesEndingInComma()
+            # GetTrueLoopLevels()
+            # ScaleComplexityLoopLevels()
+            # CalculateCyclomaticComplexity()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class ComplexityObj {
+            {static} ~ loopLevelCount : ArrayList<Integer>
+            {static} ~ loopLevel : int
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CyclomaticComplexityObj {
+            {static} ~ functionFlag : boolean
+            {static} ~ functionLevel : int
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class TempLoopObj {
+            {static} ~ loopLevel : ArrayList<Integer>
+            {static} ~ loopKeyword : ArrayList<String>
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CSharpLanguageProperties {
+            + CSharpLanguageProperties()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CmplxDataType {
+            + Keyword : String
+            + Count : int
+            + CmplxDataType()
+            + CmplxDataType()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CodeCounter {
+            {static} - logger : Logger
+            {static} # RtParams : RuntimeParameters
+            # CompilerDir : ArrayList<String>
+            # LineTerminator : ArrayList<String>
+            # ExecKeywords : ArrayList<String>
+            # DataKeyword : ArrayList<String>
+            # MathKeywords : ArrayList<String>
+            # TrigKeywords : ArrayList<String>
+            # LogKeywords : ArrayList<String>
+            # CalcKeywords : ArrayList<String>
+            # CondKeywords : ArrayList<String>
+            # LogicKeywords : ArrayList<String>
+            # AssignKeywords : ArrayList<String>
+            # PntrKeywords : ArrayList<String>
+            # LslocKeywords : ArrayList<String>
+            # LoopKeywords : ArrayList<String>
+            # CyclCmplexKeywords : ArrayList<String>
+            # UniqueDataKeywords : ArrayList<String>
+            # SingleLineComment : ArrayList<String>
+            # MultiLineCommentStart : ArrayList<String>
+            # MultiLineCommentEnd : ArrayList<String>
+            # QuoteChar : ArrayList<String>
+            # CompilerChar : ArrayList<String>
+            # LineContChars : ArrayList<String>
+            # ExcludeKeyword : ArrayList<String>
+            # ExcludeCharacter : ArrayList<String>
+            # FunctionKeywords : ArrayList<String>
+            + CodeCounter()
+            + CodeCounter()
+            {static} + DeletePathPatterns()
+            # LoadLangProperties()
+            # SetUniqueDataKeywords()
+            # InitCmplxKeywords()
+            # InitAllCmplxKeywords()
+            + CountSLOC()
+            + MCountSLOC()
+            # FindClose()
+            # CountKeywords()
+            # DeleteUnwantedStringsFromQuotes()
+            # DeleteUnwantedStringsFromBraces()
+            # DeleteSpacesAroundSpecialChars()
+            # ReplaceSpecialChars()
+            # DeleteEmptyQuotes()
+            # DeleteEscapedQuotes()
+            # DeleteUTF8BOM()
+            # CountHashBangDirective()
+            # DeleteAllCurlyBracketsNotInCompilerDirectives()
+            # DeleteExcludeKeywords()
+            # DeleteCompilerDirectives()
+            # DeleteQuoteContents()
+            # DeleteLoopContents()
+            # DeleteCaseStatements()
+            # DeleteLinesEndingWithAColon()
+            # DeleteExcludeCharacters()
+            # CountDataDeclarations()
+            # DeleteEmptyParentheses()
+            # DeleteApostraphesFromWords()
+            # CountFilePSLOC()
+            + MCountFilePSLOC()
+            # CountFileLSLOC()
+            + MCountFileLSLOC()
+            # CountCmplxPreProc()
+            # CountCmplxDataDecl()
+            # CountCmplxPntr()
+            # CountCmplxTrig()
+            # CountCmplxLog()
+            # CountCmplxMath()
+            # CountCmplxCond()
+            # CountCmplxLogic()
+            # CountCmplxCalc()
+            # CountCmplxAssign()
+            # CountComplexity()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class ParseResult {
+            ~ returnLine : String
+            ~ returnFlag : boolean
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CommentHandler {
+            {static} - logger : Logger
+            - NumWholeComments : int
+            - NumEmbeddedComments : int
+            - NumBlankLines : int
+            - inComment : boolean
+            - commentIndex : int
+            - SingleLineComment : ArrayList<String>
+            - MultiLineCommentStart : ArrayList<String>
+            - MultiLineCommentEnd : ArrayList<String>
+            + CommentHandler()
+            + CommentHandler()
+            + GetEmbeddedCommentTally()
+            + GetWholeCommentTally()
+            + GetBlankLineTally()
+            - SetupVariables()
+            - SetupVariables()
+            - SetupState()
+            - HandleOnlySingleLineComments()
+            - HandleOnlyMultiLineComments()
+            - HandleSingleLineAndMultiLineComments()
+            - HandleNoComments()
+            + HandleComments()
+            + ResetState()
+            + ResetExternalData()
+            + Reset()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        enum CommentState {
+          HAS_NO_COMMENTS
+          HAS_ONLY_SINGLE_LINE_COMMENTS
+          HAS_ONLY_MULTILINE_COMMENTS
+          HAS_SINGLE_AND_MULTILINE_COMMENTS
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        enum CommentType {
+          SINGLE
+          MULTI
+          NONE
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        enum CommentFound {
+          EMBEDDED
+          WHOLE
+          NONE
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class CompilerDirectiveHandler {
+            ~ CompilerDirChars : ArrayList<String>
+            ~ CompilerDirKeywords : ArrayList<String>
+            ~ LineContChars : ArrayList<String>
+            ~ NumCompilerDirectives : int
+            ~ NumCompilerContinuations : int
+            ~ compilerDirectives : String
+            - inCompilerDirective : boolean
+            + CompilerDirectiveHandler()
+            + GetNumCompilerDirectives()
+            + GetNumCompilerContinuations()
+            + GetCompilerDirectives()
+            + AddCompilerDirective()
+            + HandleCompilerDirectives()
+            # IsCompilerDirective()
+            # IsCompilerDirectiveContinued()
+            + GatherCompilerDirectives()
+            + ResetState()
+            + ResetExternalData()
+            + Reset()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class Constants {
+            {static} + MIN_MOD_THRESHOLD : double
+            {static} + MAX_MOD_THRESHOLD : double
+            {static} + DEFAULT_MOD_THRESHOLD : double
+            {static} + MIN_DUP_THRESHOLD : double
+            {static} + MAX_DUP_THRESHOLD : double
+            {static} + DEFAULT_DUP_THRESHOLD : double
+            {static} + MIN_TRUNC_THRESHOLD : int
+            {static} + MAX_TRUNC_THRESHOLD : int
+            {static} + DEFAULT_TRUNC_THRESHOLD : int
+            {static} + NEW_LINE_SEPARATOR : String
+            {static} + CHARSET_NAME : String
+            {static} + PSLOC_FILE_SUFFIX : String
+            {static} + LSLOC_FILE_SUFFIX : String
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class DataTypes {
+            {static} - fileIndex : int
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        enum LanguagePropertiesType {
+          ADA
+          ASP
+          ASSEMBLY
+          BASH
+          C_CPP
+          CSHARP
+          CSHELL
+          COLDFUSION
+          COLDFUSION_SCRIPT
+          CSS
+          DOS_BATCH
+          FORTRAN
+          HTML
+          IDL
+          JAVA
+          JAVASCRIPT
+          JSP
+          MAKEFILE
+          MATLAB
+          NEXTMIDAS
+          PASCAL
+          PERL
+          PHP
+          PYTHON
+          RUBY
+          SCALA
+          SQL
+          VB
+          VB_SCRIPT
+          VERILOG
+          VHDL
+          XMIDAS
+          XML
+          CUSTOM
+          LangIdx
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        enum SourceFileType {
+          CODE
+          DATA
+          TEXT
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class FileUtils {
+            {static} - logger : Logger
+            {static} + GenerateFileList()
+            {static} + GenerateFilteredFileList()
+            {static} + ValidateDir()
+            {static} + VerifyFileList()
+            {static} + GetFileExt()
+            {static} + GetFileName()
+            {static} + ReadLines()
+            {static} + DeleteFile()
+            {static} + RemoveDuplicates()
+            {static} + CheckForDuplicateFileNames()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        abstract class LanguageProperties {
+            - LangVersion : String
+            - LangName : String
+            - SimilarTo : String
+            - LangFileExts : ArrayList<String>
+            - CaseSensitive : boolean
+            - ExecLineTermChars : ArrayList<String>
+            - SingleLineCmntStartChars : ArrayList<String>
+            - MultiLineCmntStartChars : ArrayList<String>
+            - MultiLineCmntEndChars : ArrayList<String>
+            - CompilerDirChars : ArrayList<String>
+            - CompilerDirKeywords : ArrayList<String>
+            - QuoteStartChars : ArrayList<String>
+            - LineContChars : ArrayList<String>
+            - FuncStartKeywords : ArrayList<String>
+            - LoopKeywords : ArrayList<String>
+            - CondKeywords : ArrayList<String>
+            - LogicalOps : ArrayList<String>
+            - AssignmentOps : ArrayList<String>
+            - OtherExecKeywords : ArrayList<String>
+            - DataKeywords : ArrayList<String>
+            - CalcKeywords : ArrayList<String>
+            - LogOpKeywords : ArrayList<String>
+            - TrigOpKeywords : ArrayList<String>
+            - OtherMathKeywords : ArrayList<String>
+            - ExcludeKeywords : ArrayList<String>
+            - ExcludeCharacters : ArrayList<String>
+            - CyclCmplexKeywords : ArrayList<String>
+            - LslocKeywords : ArrayList<String>
+            - PointerKeywords : ArrayList<String>
+            + LanguageProperties()
+            + GetLangVersion()
+            + SetLangVersion()
+            + GetLangName()
+            + SetLangName()
+            + SetSimilarTo()
+            + GetSimilarTo()
+            + GetLangFileExts()
+            + SetLangFileExts()
+            + SetCaseSensitive()
+            + IsCaseSensitive()
+            + GetExecLineTermChars()
+            + SetExecLineTermChars()
+            + GetSingleLineCmntStartChars()
+            + SetSingleLineCmntStartChars()
+            + GetMultiLineCmntStartChars()
+            + SetMultiLineCmntStartChars()
+            + GetMultiLineCmntEndChars()
+            + SetMultiLineCmntEndChars()
+            + GetCompilerDirChars()
+            + SetCompilerDirChars()
+            + GetCompilerDirKeywords()
+            + SetCompilerDirKeywords()
+            + GetQuoteStartChars()
+            + SetQuoteStartChars()
+            + GetLineContChars()
+            + SetLineContChars()
+            + GetFuncStartKeywords()
+            + SetFuncStartKeywords()
+            + GetLoopKeywords()
+            + SetLoopKeywords()
+            + GetCondKeywords()
+            + SetCondKeywords()
+            + GetLogicalOps()
+            + SetLogicalOps()
+            + GetAssignmentOps()
+            + SetAssignmentOps()
+            + GetOtherExecKeywords()
+            + SetOtherExecKeywords()
+            + GetDataKeywords()
+            + SetDataKeywords()
+            + GetCalcKeywords()
+            + SetCalcKeywords()
+            + GetLogOpKeywords()
+            + SetLogOpKeywords()
+            + GetTrigOpKeywords()
+            + SetTrigOpKeywords()
+            + GetOtherMathKeywords()
+            + SetOtherMathKeywords()
+            + GetExcludeKeywords()
+            + SetExcludeKeywords()
+            + GetExcludeCharacters()
+            + SetExcludeCharacters()
+            + GetCyclCmplexKeywords()
+            + SetCyclCmplexKeywords()
+            + GetLslocKeywords()
+            + SetLslocKeywords()
+            + GetPointerKeywords()
+            + SetPointerKeywords()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class MultiLanguageHandler {
+            {static} - logger : Logger
+            - CSSStartTags : ArrayList<String>
+            - CSSEndTags : ArrayList<String>
+            - CSSCode : String
+            - JSStartTags : ArrayList<String>
+            - JSEndTags : ArrayList<String>
+            - JSCode : String
+            - PHPStartTags : ArrayList<String>
+            - PHPEndTags : ArrayList<String>
+            - PHPCode : String
+            - VBSStartTags : ArrayList<String>
+            - VBSEndTags : ArrayList<String>
+            - VBSCode : String
+            - ERBStartTags : ArrayList<String>
+            - ERBEndTags : ArrayList<String>
+            - ERBCode : String
+            - JSPStartTags : ArrayList<String>
+            - JSPEndTags : ArrayList<String>
+            - JSPCode : String
+            - GSPStartTags : ArrayList<String>
+            - GSPEndTags : ArrayList<String>
+            - GSPCode : String
+            - ASPStartTags : ArrayList<String>
+            - ASPEndTags : ArrayList<String>
+            - ASPCode : String
+            - HTMLCode : String
+            - CFCode : String
+            - CFSStartTags : ArrayList<String>
+            - CFSEndTags : ArrayList<String>
+            - CFSCode : String
+            - SQLStartTags : ArrayList<String>
+            - SQLEndTags : ArrayList<String>
+            - SQLCode : String
+            - XMLCode : String
+            - openStartTag : boolean
+            - openCFTag : boolean
+            - fileExt : String
+            - fileLanguage : String
+            + MultiLanguageHandler()
+            + GetFileExt()
+            - SetupVariables()
+            - SetupState()
+            + HandleEmbeddedCode()
+            + HandleEmbeddedLanguages()
+            + SearchForEmbeddedStart()
+            + SearchForMultiLineEmbeddedStart()
+            + HandleEmbeddedCode()
+            + SaveCode()
+            + PrintCode()
+            + WriteFile()
+            + Reset()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        enum LanguageState {
+          IN_HTML
+          IN_CSS
+          IN_JS
+          IN_PHP
+          IN_VBS
+          IN_ERB
+          IN_JSP
+          IN_GSP
+          IN_ASP
+          IN_CF
+          IN_CFS
+          IN_SQL
+          IN_XML
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class QuoteHandler {
+            - SAVED_LINE : String
+            - QUOTE_CHARS : ArrayList<String>
+            - QUOTE_COUNT : int
+            - OPEN_QUOTE_FLAG : boolean
+            - QUOTE_CHAR : String
+            + QuoteHandler()
+            + HandleQuotes()
+            + CountQuotes()
+            + DetermineIfOpenQuote()
+            # DeleteUnwantedStringsFromClosedQuotes()
+            # DeleteUnwantedStringsFromOpenQuotes()
+            + Reset()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class RuntimeParameters {
+            {static} - RtParams : RuntimeParameters
+            + UserInputStr : StringBuffer
+            + CountSLOC : boolean
+            + DiffCode : boolean
+            + UnifyResults : boolean
+            + CountCmplxMetrics : boolean
+            + SearchForDups : boolean
+            + UseCustomLang : boolean
+            + SkipSymbLinks : boolean
+            + HndlClearCaseFiles : boolean
+            + FileListNameA : String
+            + FileListNameB : String
+            + DefaultFileListNames : String[]
+            + FileListA : ArrayList<String>
+            + FileListB : ArrayList<String>
+            + DirPathA : String
+            + DirPathB : String
+            + FileSpecs : ArrayList<String>
+            + ModThreshold : double
+            + DupThreshold : double
+            + TruncThreshold : int
+            + OutputDirPath : String
+            + ExtFileName : String
+            + FileExtToLangMap : HashMap<String, ArrayList<String>>
+            - RuntimeParameters()
+            {static} + GetInstance()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        enum OutputFormat {
+          CSV
+          ASCII
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class StringUtils {
+            {static} + directCharacterCompare()
+            {static} + substringCompare()
+            {static} + isStringAtIndex()
+            {static} + getTargetWord()
+            {static} + getStringAtIndex()
+            {static} + removeCompilerDirectiveCharacter()
+            {static} + findCharacter()
+            {static} + concatenateStrings()
+            {static} + getLineTerminatingCharacter()
+            {static} + constructPath()
+            {static} + handleHashBangDirective()
+            {static} + replace()
+            {static} + StringArrayToStringBuffer()
+            + getTargetWordLocationInTargetWords()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class StringLengthListSort {
+            + compare()
+        }
+      }
+    }
+  }
+  
+
+  package  {
+    package com.samsung.tcm {
+      package com.samsung.tcm.core.loc {
+        class UCCFile {
+            + orgLine : String
+            + feededLine : String
+            + FileName : String
+            + LangVersion : String
+            + IsDup : boolean
+            + DupCodePercent : double
+            + FileChecksum : long
+            + DupOfIdx : int
+            + IsCounted : boolean
+            + NumTotalLines : int
+            + NumBlankLines : int
+            + NumWholeComments : int
+            + NumEmbeddedComments : int
+            + NumCompilerDirectives : int
+            + NumDataDeclPhys : int
+            + NumExecInstrPhys : int
+            + NumDataDeclLog : int
+            + NumExecInstrLog : int
+            + NumPSLOC : int
+            + NumLSLOC : int
+            + EmbOfIdx : int
+            + HasEmbCode : boolean
+            + UniqueFileName : boolean
+            + CmplxMathCnts : ArrayList<CmplxDataType>
+            + CmplxTrigCnts : ArrayList<CmplxDataType>
+            + CmplxLogCnts : ArrayList<CmplxDataType>
+            + CmplxCalcCnts : ArrayList<CmplxDataType>
+            + CmplxCondCnts : ArrayList<CmplxDataType>
+            + CmplxLoopCnts : ArrayList<CmplxDataType>
+            + CmplxLogicCnts : ArrayList<CmplxDataType>
+            + CmplxPreprocCnts : ArrayList<CmplxDataType>
+            + CmplxAssignCnts : ArrayList<CmplxDataType>
+            + CmplxPntrCnts : ArrayList<CmplxDataType>
+            + DataKeywordCnts : ArrayList<CmplxDataType>
+            + ExecKeywordCnts : ArrayList<CmplxDataType>
+            + CmplxLoopLvlCnts : ArrayList<CmplxDataType>
+            + CyclCmplxCnts : ArrayList<CmplxDataType>
+            + CyclCmplxTotal : int
+            + CyclCmplxAvg : double
+            + FileLineChecksum : ArrayList<Integer>
+            + UCCFile()
+        }
+      }
+    }
+  }
+  
+
+  CCPPLanguageProperties -up-|> LanguageProperties
+  CSharpCounter -up-|> CodeCounter
+  CSharpCounter +-down- ComplexityObj
+  CSharpCounter +-down- CyclomaticComplexityObj
+  CSharpCounter +-down- TempLoopObj
+  CSharpLanguageProperties -up-|> LanguageProperties
+  CodeCounter o-- LanguageProperties : LangProps
+  CodeCounter o-- CommentHandler : CommentHandler
+  CodeCounter o-- CompilerDirectiveHandler : CompilerDirectiveHandler
+  CodeCounter o-- QuoteHandler : QuoteHandler
+  CodeCounter o-- MultiLanguageHandler : MultiLanguageHandler
+  CodeCounter +-down- ParseResult
+  CommentHandler o-- CommentState : commentState
+  CommentHandler +-down- CommentState
+  CommentHandler +-down- CommentType
+  CommentHandler +-down- CommentFound
+  DataTypes +-down- LanguagePropertiesType
+  DataTypes +-down- SourceFileType
+  MultiLanguageHandler o-- LanguageState : languageState
+  MultiLanguageHandler +-down- LanguageState
+  RuntimeParameters o-- OutputFormat : OutputFileFmt
+  RuntimeParameters +-down- OutputFormat
+  StringUtils +-down- StringLengthListSort
+  StringLengthListSort -up-|> Comparator
+  UCCFile o-- SourceFileType : FileType
+  UCCFile o-- LanguagePropertiesType : LangProperty
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

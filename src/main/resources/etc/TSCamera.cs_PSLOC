@@ -1,0 +1,592 @@
+using NUnit.Framework;
+ using System;
+ using System.Linq;
+ using System.Collections;
+ using System.Threading;
+ using System.Threading.Tasks;
+ namespace Tizen.Multimedia.Tests {
+ [TestFixture]
+ [Description("TestsTizenMultimediaCameraclass")]
+ public class CameraTests : TestBase {
+ private const CameraDevice _invalidDevideNumber = (CameraDevice)10;
+ [Test]
+ [Category("P1")]
+ [Description("TestCameraConstructorforrearcameraObjectshouldnotbenullafterinitializing")]
+ [Property("SPEC", "TizenMultimediaCameraCameraC")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "CONSTR")]
+ [Property("AUTHOR", "Vivekellurvivekellursamsungcom")]
+ public void Camera_Rear_INIT() {
+ Assert.IsInstanceOf<Camera>(TestCamera, "Shouldreturncamerainstance");
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestCameraConstructorforfrontcameraObjectshouldnotbenullafterinitializing")]
+ [Property("SPEC", "TizenMultimediaCameraCameraC")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "CONSTR")]
+ [Property("AUTHOR", "Vivekellurvivekellursamsungcom")]
+ public void Camera_front_INIT() {
+ 
+if (IsSupportedSecondaryCamera() == false) {
+ Assert.Pass("SecondaryCameraisnotsupported");
+ }
+ using (Camera camera = new Camera(CameraDevice.Front)) {
+ Assert.IsNotNull(camera, "Objectshouldnotbenullafterinitializing");
+ Assert.IsInstanceOf<Camera>(camera, "Shouldreturncamerainstance");
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestGetDeviceStatemethodforeachspecificstate")]
+ [Property("SPEC", "TizenMultimediaCameraGetDeviceStateM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MAE")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task GetDeviceState_ENUM_ALL() {
+ 
+if (IsSupportedSecondaryCamera()) {
+ Assert.That(Camera.GetDeviceState(CameraDevice.Front), Is.EqualTo(CameraDeviceState.NotOpened));
+ }
+ Assert.That(Camera.GetDeviceState(CameraDevice.Rear), Is.EqualTo(CameraDeviceState.NotOpened));
+ using (var eventWaiter = EventAwaiter<CameraStateChangedEventArgs>.Create()) {
+ TestCamera.StateChanged += eventWaiter;
+ TestCamera.StartPreview();
+ await eventWaiter.IsRaisedAsync();
+ Assert.That(Camera.GetDeviceState(CameraDevice.Rear), Is.EqualTo(CameraDeviceState.Working));
+ }
+ }
+ [Test]
+ [Category("P2")]
+ [Description("MethodthrowsArgumentExceptionifthespecifiedparameterisinvalid")]
+ [Property("SPEC", "TizenMultimediaCameraGetDeviceStateM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MEX")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void GetDeviceState_THROWS_IF_PARAM_IS_INVALID() {
+ Assert.Throws<ArgumentException>(() => Camera.GetDeviceState(_invalidDevideNumber));
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestChangeDevicemethodfromfronttorearcameraandcheckitsstate")]
+ [Property("SPEC", "TizenMultimediaCameraChangeDeviceM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MCST")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public void ChangeDevice_ENUM_DEVICE_REAR() {
+ 
+if (IsSupportedSecondaryCamera() == false) {
+ Assert.Pass("SecondaryCameraisnotsupported");
+ }
+ using (Camera camera = new Camera(CameraDevice.Front)) {
+ camera.ChangeDevice(CameraDevice.Rear);
+ Assert.That(camera.State, Is.EqualTo(CameraState.Created));
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestChangeDevicemethodfromreartofrontcameraandcheckitsstate")]
+ [Property("SPEC", "TizenMultimediaCameraChangeDeviceM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MCST")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public void ChangeDevice_ENUM_DEVICE_FRONT() {
+ 
+if (IsSupportedSecondaryCamera() == false) {
+ Assert.Pass("SecondaryCameraisnotsupported");
+ }
+ using (Camera camera = new Camera(CameraDevice.Front)) {
+ Assert.That(camera.State, Is.EqualTo(CameraState.Created));
+ }
+ }
+ [Test]
+ [Category("P2")]
+ [Description("MethodthrowsArgumentExceptionifthespecifiedparameterisinvalid")]
+ [Property("SPEC", "TizenMultimediaCameraChangeDeviceM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MEX")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void ChangeDevice_THROWS_IF_PARAM_IS_INVALID() {
+ Assert.Throws<ArgumentException>(() => TestCamera.ChangeDevice(_invalidDevideNumber));
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestStopPreviewmethodbycheckingwhetheritchangesthecamerastatetoCreated")]
+ [Property("SPEC", "TizenMultimediaCameraStopPreviewM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MCST")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task StopPreview_CHECK_STATE() {
+ using (var eventWaiter = EventAwaiter<CameraStateChangedEventArgs>.Create()) {
+ TestCamera.StateChanged += eventWaiter;
+ TestCamera.StartPreview();
+ await eventWaiter.IsRaisedAsync();
+ }
+ TestCamera.StopPreview();
+ Assert.That(TestCamera.State, Is.EqualTo(CameraState.Created));
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TesttheStopContinuousCapturemethod")]
+ [Property("SPEC", "TizenMultimediaCameraStartCaptureM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MCST")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ [Property("COVPARAM", "intintCancellationToken")]
+ public async Task StartCapture_CHANGE_STATUS() {
+ TestCamera.StartPreview();
+ using (var completeWaiter = EventAwaiter<CameraCapturingEventArgs>.Create()) using (var tokenSource = new CancellationTokenSource()) {
+ try {
+ TestCamera.Capturing += completeWaiter;
+ TestCamera.StartCapture(10, 100, tokenSource.Token);
+ await completeWaiter.IsRaisedAsync();
+ }
+ 
+catch (NotSupportedException) {
+ 
+if (TestCamera.Capabilities.IsContinuousCaptureSupported) Assert.Fail("Continuouscaptureisfailed");
+ else Assert.Pass("Continuouscapturefeatureisnotsupported");
+ }
+ 
+catch (Exception ex) {
+ Assert.Fail("ContinuouscaptureisfailedMsg" + ex.ToString());
+ }
+ using (var eventWaiter = EventAwaiter<CameraStateChangedEventArgs>.Create()) {
+ TestCamera.StateChanged += eventWaiter;
+ tokenSource.Cancel();
+ await eventWaiter.IsRaisedAsync();
+ }
+ Assert.That(TestCamera.State, Is.EqualTo(CameraState.Captured));
+ }
+ }
+ [Test]
+ [Category("P2")]
+ [Description("TesttheStartCapturemethodCheckthatexceptionisoccurredwhenCancellationTokenSourceCanceliscalledininvalidstate")]
+ [Property("SPEC", "TizenMultimediaCameraStartCaptureM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MEX")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ [Property("COVPARAM", "intintCancellationToken")]
+ public async Task StartCapture_INVALID_OP_EXCEPTION() {
+ TestCamera.StartPreview();
+ using (var tokenSource = new CancellationTokenSource()) {
+ try {
+ TestCamera.StartCapture(3, 100, tokenSource.Token);
+ await Task.Delay(1000);
+ }
+ 
+catch (NotSupportedException) {
+ 
+if (TestCamera.Capabilities.IsContinuousCaptureSupported) Assert.Fail("Continuouscaptureisfailed");
+ else Assert.Pass("Continuouscapturefeatureisnotsupported");
+ }
+ 
+catch (Exception ex) {
+ Assert.Fail("ContinuouscaptureisfailedMsg" + ex.ToString());
+ }
+ try {
+ tokenSource.Cancel();
+ }
+ 
+catch (AggregateException ex) {
+ ex.Handle((x) => {
+ 
+if (x is InvalidOperationException) {
+ Assert.Pass("Properexceptionisoccured");
+ return true;
+ }
+ Assert.Fail("Properexceptionisnotoccured");
+ return false;
+ });
+ }
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestStopFaceDetectionmethodThemethodshouldworkwithoutanyexception")]
+ [Property("SPEC", "TizenMultimediaCameraStopFaceDetectionM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MR")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public void StopFaceDetection_NO_EXCEPTION() {
+ TestCamera.StartPreview();
+ try {
+ TestCamera.StartFaceDetection();
+ }
+ 
+catch (NotSupportedException) {
+ 
+if (TestCamera.Capabilities.IsFaceDetectionSupported) Assert.Fail("FaceDetectionfeatureissupportedButStartFaceDetectionreturnsNotSupportedException");
+ else Assert.Pass("FaceDetectionfeatureisnotsupported");
+ }
+ try {
+ TestCamera.StopFaceDetection();
+ }
+ catch { Assert.Fail("Exceptionshouldnotbeoccurred");
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestCancelFocusingmethodThemethodshouldworkwithoutanyexception")]
+ [Property("SPEC", "TizenMultimediaCameraStopFocusingM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MR")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void StopFocusing_NO_EXCEPTION() {
+ bool isAfModeSupported = false;
+ IList afModes = TestCamera.Capabilities.SupportedAutoFocusModes.ToList();
+ foreach (CameraAutoFocusMode afMode in afModes) {
+ 
+if (afMode != CameraAutoFocusMode.None) {
+ TestCamera.Settings.AutoFocusMode = afMode;
+ isAfModeSupported = true;
+ break;
+ }
+ }
+ TestCamera.StartPreview();
+ try {
+ TestCamera.StartFocusing(true);
+ }
+ 
+catch (NotSupportedException) {
+ 
+if (isAfModeSupported) Assert.Fail("StartFocusingisfailed");
+ else Assert.Pass("Autofocusfeatureisnotsupported");
+ }
+ try {
+ TestCamera.StopFocusing();
+ }
+ catch { Assert.Fail("Noexceptionshouldbeoccurred");
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("Testallavailablecamerastate")]
+ [Property("SPEC", "TizenMultimediaCameraStateA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRE")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task State_GET_ENUM_ALL() {
+ Assert.That(TestCamera.State, Is.EqualTo(CameraState.Created));
+ TestCamera.StartPreview();
+ Assert.That(TestCamera.State, Is.EqualTo(CameraState.Preview));
+ using (var eventWaiter = EventAwaiter<EventArgs>.Create()) {
+ TestCamera.CaptureCompleted += eventWaiter;
+ TestCamera.StartCapture();
+ Assert.That(await eventWaiter.IsRaisedAsync());
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestDisplayReuseHintpropertywhetheritissetcorrectlyornot")]
+ [Property("SPEC", "TizenMultimediaCameraDisplayReuseHintA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRW")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task DisplayReuseHint_PROPERTY_READ_WRITE() {
+ using (var eventWaiter = EventAwaiter<CameraStateChangedEventArgs>.Create()) {
+ TestCamera.StateChanged += eventWaiter;
+ TestCamera.StartPreview();
+ await eventWaiter.IsRaisedAsync();
+ }
+ TestCamera.DisplayReuseHint = true;
+ Assert.IsNotNull(TestCamera.DisplayReuseHint, "displayreusehintshouldnotbenull");
+ Assert.IsTrue(TestCamera.DisplayReuseHint, "displayreusehintisnotsameassetvalue");
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestDisplaypropertyofthecamera")]
+ [Property("SPEC", "TizenMultimediaCameraDisplayA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRO")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void Display_PROPERTY_READ_ONLY() {
+ try {
+ TestCamera.Display = new Display(new MediaView(CreateWindow()));
+ }
+ 
+catch (NotSupportedException) {
+ Assert.Pass("EVASsurfacedisplaytypeisnotsupported");
+ }
+ catch { Assert.Fail("Setdisplayforsurfacetypeisfailed");
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestSettingpropertyofthecamera")]
+ [Property("SPEC", "TizenMultimediaCameraSettingsA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRO")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public void Settings_PROPERTY_READ_ONLY() {
+ var result = TestCamera.Settings;
+ Assert.IsNotNull(result, "settingshouldnotbenull");
+ Assert.IsInstanceOf<CameraSettings>(result, "TheobjectshouldbeoftypeCameraSettings");
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestFeaturepropertyofthecamera")]
+ [Property("SPEC", "TizenMultimediaCameraCapabilitiesA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRO")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public void Capabilities_PROPERTY_READ_ONLY() {
+ var result = TestCamera.Capabilities;
+ Assert.IsNotNull(result, "featureshouldnotbenull");
+ Assert.IsInstanceOf<CameraCapabilities>(result, "TheobjectshouldbeoftypeCameraCapabilities");
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestDisplaySettingspropertyofthecamera")]
+ [Property("SPEC", "TizenMultimediaCameraDisplaySettingsA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRO")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void DisplaySettings_PROPERTY_READ_ONLY() {
+ var result = TestCamera.DisplaySettings;
+ Assert.IsNotNull(result, "DisplaySettingsshouldnotbenull");
+ Assert.IsInstanceOf<CameraDisplaySettings>(result, "TheobjectshouldbeoftypeDisplaySettings");
+ }
+ [Test]
+ [Category("P1")]
+ [Description("Testcameradirectionpropertyofthecamera")]
+ [Property("SPEC", "TizenMultimediaCameraDirectionA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRO")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public void Direction_PROPERTY_READ_ONLY() {
+ CameraFacingDirection direction = TestCamera.Direction;
+ Assert.IsNotNull(direction, "Cameradirectionshouldnotbenull");
+ Assert.IsInstanceOf<CameraFacingDirection>(direction, "TheobjectshouldbeoftypeCameraFacingDirection");
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestFlashstatepropertyofthecamera")]
+ [Property("SPEC", "TizenMultimediaCameraGetFlashStateM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MR")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void GetFlashState_NO_EXCEPTION() {
+ try {
+ CameraFlashState state = Camera.GetFlashState(CameraDevice.Rear);
+ Assert.IsNotNull(state, "Cameraflashstateshouldnotbenull");
+ Assert.IsInstanceOf<CameraFlashState>(state, "TheobjectshouldbeoftypeCameraFlashState");
+ }
+ 
+catch (NotSupportedException) {
+ Assert.Pass("Flashfeatureisnotsupported");
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("Testcameracountpropertyofthecamera")]
+ [Property("SPEC", "TizenMultimediaCameraCameraCountA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRO")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public void CameraCount_PROPERTY_READ_ONLY() {
+ var result = TestCamera.CameraCount;
+ Assert.IsInstanceOf<int>(result, "Thevalueshouldbeoftypeint");
+ Assert.IsTrue(result > 0, "WrongCameraCountvalueforCamera");
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestHdrCaptureProgressEvent")]
+ [Property("SPEC", "TizenMultimediaCameraHdrCaptureProgressA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task HdrCaptureProgress_CHECK_EVENT() {
+ 
+if (TestCamera.Capabilities.IsHdrCaptureSupported == false) {
+ Assert.Pass("HDRfeatureisnotsupported");
+ }
+ using (var completeWaiter = EventAwaiter.Create()) using (var eventWaiter = EventAwaiter<HdrCaptureProgressEventArgs>.Create()) {
+ TestCamera.Settings.HdrMode = CameraHdrMode.Enable;
+ TestCamera.HdrCaptureProgress += eventWaiter;
+ TestCamera.CaptureCompleted += completeWaiter;
+ TestCamera.StartPreview();
+ TestCamera.StartCapture();
+ var eventArgs = await eventWaiter.GetResultAsync();
+ Assert.That(eventArgs.Percent, Is.GreaterThan(0), "HDRprogressshouldbebiggerthan0");
+ await completeWaiter.IsRaisedAsync();
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestCapturingEvent")]
+ [Property("SPEC", "TizenMultimediaCameraCapturingE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task Capturing_CHECK_EVENT() {
+ using (var completeWaiter = EventAwaiter.Create()) using (var eventWaiter = EventAwaiter<CameraCapturingEventArgs>.Create()) {
+ TestCamera.Settings.ImageQuality = 100;
+ TestCamera.Settings.CapturePixelFormat = CameraPixelFormat.Jpeg;
+ TestCamera.Capturing += eventWaiter;
+ TestCamera.CaptureCompleted += completeWaiter;
+ TestCamera.StartPreview();
+ TestCamera.StartCapture();
+ Assert.That(await eventWaiter.IsRaisedAsync());
+ await completeWaiter.IsRaisedAsync();
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestCaptureCompletedEvent")]
+ [Property("SPEC", "TizenMultimediaCameraCaptureCompletedE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task CaptureCompleted_CHECK_EVENT() {
+ using (var completeWaiter = EventAwaiter.Create()) using (var eventWaiter = EventAwaiter<EventArgs>.Create()) {
+ TestCamera.Settings.ImageQuality = 100;
+ TestCamera.Settings.CapturePixelFormat = CameraPixelFormat.Jpeg;
+ TestCamera.CaptureCompleted += eventWaiter;
+ TestCamera.CaptureCompleted += completeWaiter;
+ TestCamera.StartPreview();
+ TestCamera.StartCapture();
+ Assert.That(await eventWaiter.IsRaisedAsync());
+ await completeWaiter.IsRaisedAsync();
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestCameraStateChangedEvent")]
+ [Property("SPEC", "TizenMultimediaCameraStateChangedE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task StateChanged_CHECK_EVENT() {
+ using (var eventWaiter = EventAwaiter<CameraStateChangedEventArgs>.Create()) {
+ TestCamera.StateChanged += eventWaiter;
+ TestCamera.StartPreview();
+ Assert.That(await eventWaiter.IsRaisedAsync());
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestDeviceStateChangedmethod")]
+ [Property("SPEC", "TizenMultimediaCameraDeviceStateChangedE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public async Task DeviceStateChanged_CHECK_EVENT() {
+ using (var eventWaiter = EventAwaiter<CameraDeviceStateChangedEventArgs>.Create()) {
+ Camera.DeviceStateChanged += eventWaiter;
+ TestCamera.StartPreview();
+ Assert.That(await eventWaiter.IsRaisedAsync());
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestInterruptedEventofCamera")]
+ [Property("SPEC", "TizenMultimediaCameraInterruptedE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void Interrupted_CHECK_EVENT() {
+ using (var eventWaiter = EventAwaiter<CameraInterruptedEventArgs>.Create()) {
+ try {
+ TestCamera.Interrupted += eventWaiter;
+ }
+ 
+catch (Exception ex) {
+ Assert.Fail("Exceptionisoccuredmsg" + ex.ToString());
+ }
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestInterruptStartedEventofCamera")]
+ [Property("SPEC", "TizenMultimediaCameraInterruptStartedE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void InterruptStarted_CHECK_EVENT() {
+ using (var eventWaiter = EventAwaiter<CameraInterruptStartedEventArgs>.Create()) {
+ try {
+ TestCamera.InterruptStarted += (s, e) => { };
+ }
+ 
+catch (Exception ex) {
+ Assert.Fail("Exceptionisoccuredmsg" + ex.ToString());
+ }
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestErrorOccurredevent")]
+ [Property("SPEC", "TizenMultimediaCameraErrorOccurredE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void ErrorOccurred_CHECK_EVENT() {
+ using (var eventWaiter = EventAwaiter<CameraErrorOccurredEventArgs>.Create()) {
+ try {
+ TestCamera.ErrorOccurred += (s, e) => { };
+ }
+ 
+catch (Exception ex) {
+ Assert.Fail("Exceptionisoccuredmsg" + ex.ToString());
+ }
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestPreviewevent")]
+ [Property("SPEC", "TizenMultimediaCameraPreviewE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task Preview_CHECK_EVENT() {
+ using (var eventWaiter = EventAwaiter<CameraStateChangedEventArgs>.Create()) {
+ TestCamera.StateChanged += eventWaiter;
+ TestCamera.StartPreview();
+ Assert.That(await eventWaiter.IsRaisedAsync());
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestMediaPacketPreviewevent")]
+ [Property("SPEC", "TizenMultimediaCameraMediaPacketPreviewE")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "EVL")]
+ [Property("AUTHOR", "VivekEllurvivekellursamsungcom")]
+ public async Task MediaPacketPreview_CHECK_EVENT() {
+ 
+if (TestCamera.Capabilities.IsMediaPacketPreviewCallbackSupported == false) {
+ Assert.Pass("MediaPacketPreviewCallbackfeatureisnotsupported");
+ }
+ using (var eventWaiter = EventAwaiter<MediaPacketPreviewEventArgs>.Create()) {
+ TestCamera.MediaPacketPreview += eventWaiter;
+ TestCamera.StartPreview();
+ var eventArgs = await eventWaiter.GetResultAsync();
+ Assert.IsNotNull(eventArgs.Packet);
+ }
+ }
+ [Test]
+ [Category("P1")]
+ [Description("TestCameraHandle")]
+ [Property("SPEC", "TizenMultimediaCameraHandleA")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "PRO")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void Handle_PROPERTY_READ_ONLY() {
+ Assert.IsNotNull(TestCamera.Handle, "FailedtogetCameraHandle");
+ }
+ [Test]
+ [Category("P2")]
+ [Description("TestDisposemethodbycheckingwhetheritchangesthecamerastatetoCreated")]
+ [Property("SPEC", "TizenMultimediaCameraDisposeM")]
+ [Property("SPECURL", "")]
+ [Property("CRITERIA", "MEX")]
+ [Property("AUTHOR", "HaesuGwonhaesugwonsamsungcom")]
+ public void Dispose_CHECK_STATE() {
+ TestCamera.Dispose();
+ Assert.Throws<ObjectDisposedException>(() => { IntPtr handle = TestCamera.Handle;
+ });
+ }
+ }
+ }
+ 

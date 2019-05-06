@@ -1,0 +1,1 @@
+{if (IsSupportedSecondaryCamera() == false){Assert.Pass("Secondary Camera is not supported.");}using (Camera camera = new Camera(CameraDevice.Front)){Assert.IsNotNull(camera, "Object should not be null after initializing");Assert.IsInstanceOf<Camera>(camera, "Should return camera instance");}}

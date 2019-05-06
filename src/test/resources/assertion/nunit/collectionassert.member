@@ -1,0 +1,13 @@
+AllItemsAreInstancesOfType
+AllItemsAreNotNull
+AllItemsAreUnique
+AreEqual
+AreEquivalent
+AreNotEqual
+Contains
+DoesNotContain
+IsSubsetOf
+IsNotSubsetOf
+IsEmpty
+IsNotEmpty
+IsOrdered
